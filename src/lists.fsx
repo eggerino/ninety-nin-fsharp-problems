@@ -41,5 +41,17 @@ let rev items =
     aux [] items
 
 // Problem 6
-let isPalindrome items =
-    items = rev items
+let isPalindrome items = items = rev items
+
+// Problem 7
+type 'a Node =
+    | One of 'a
+    | Many of 'a Node list
+
+let flatten items =
+    let rec aux acc = function
+        | [] -> acc
+        | One item :: rest -> item :: aux acc rest
+        | Many children :: rest -> aux (aux acc rest) children
+    
+    aux [] items
