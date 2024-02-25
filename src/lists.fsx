@@ -203,3 +203,43 @@ let rec insertAt item i =
     | [] -> [ item ]
     | x when i = 0 -> item :: x
     | a :: t -> a :: insertAt item (i - 1) t
+
+// Problem 22
+let rec range a b =
+    if a = b then [ a ]
+    elif a < b then a :: range (a + 1) b
+    else a :: range (a - 1) b
+
+// Problem 23
+let randSelect items count =
+    let rng = new System.Random()
+    let len = length items
+
+    let getRandomItem () =
+        at (1 + rng.Next len) items |> Option.get
+
+    let rec aux acc =
+        function
+        | 0 -> acc
+        | i -> aux (getRandomItem () :: acc) (i - 1)
+
+    aux [] count
+
+// Problem 24
+let lottoSelect n m =
+    let rng = new System.Random()
+
+    let rec aux =
+        function
+        | 0 -> []
+        | i -> rng.Next(1, m) :: aux (i - 1)
+
+    aux n
+
+// Problem 25
+let rec permutation items =
+    let i = (new System.Random()).Next (length items)
+
+    match items with
+    | [] -> []
+    | x -> Option.get (at (i + 1) items) :: permutation (removeAt i items)
