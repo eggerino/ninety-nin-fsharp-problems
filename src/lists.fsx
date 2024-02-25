@@ -189,3 +189,10 @@ let rotate items n =
     let count = if len = 0 then 0 else ((n % len) + len) % len
     let first, second = split items count
     second @ first
+
+// Problem 20
+let rec removeAt i =
+    function
+    | [] -> []
+    | _ :: t when i = 0 -> t
+    | a :: t -> a :: removeAt (i - 1) t
