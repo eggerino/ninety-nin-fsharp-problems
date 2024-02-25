@@ -169,3 +169,12 @@ let drop items n =
         | a :: t -> a :: aux (i + 1) t
 
     aux 1 items
+
+// Problem 17
+let rec split items count =
+    match items, count with
+    | _, 0 -> [], items
+    | [], _ -> [], []
+    | a :: t, _ ->
+        let take, rest = split t (count - 1)
+        a :: take, rest
