@@ -49,9 +49,16 @@ type 'a Node =
     | Many of 'a Node list
 
 let flatten items =
-    let rec aux acc = function
+    let rec aux acc =
+        function
         | [] -> acc
         | One item :: rest -> item :: aux acc rest
         | Many children :: rest -> aux (aux acc rest) children
-    
+
     aux [] items
+
+// Problem 8
+let rec compress =
+    function
+    | a :: (b :: _ as rest) -> if a = b then compress rest else a :: compress rest
+    | x -> x
