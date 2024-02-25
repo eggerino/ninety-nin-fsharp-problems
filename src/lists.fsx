@@ -78,3 +78,17 @@ let pack items =
             aux (block :: acc) consumedItems
 
     items |> aux [] |> rev
+
+// Problem 10
+let encode items =
+    let rec aux count acc =
+        function
+        | [] -> acc
+        | [ x ] -> (count + 1, x) :: acc
+        | a :: (b :: _ as rest) ->
+            if a = b then
+                aux (count + 1) acc rest
+            else
+                aux 0 ((count + 1, a) :: acc) rest
+
+    rev (aux 0 [] items)
