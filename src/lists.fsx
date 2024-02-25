@@ -238,7 +238,7 @@ let lottoSelect n m =
 
 // Problem 25
 let rec permutation items =
-    let i = (new System.Random()).Next (length items)
+    let i = (new System.Random()).Next(length items)
 
     match items with
     | [] -> []
@@ -247,13 +247,13 @@ let rec permutation items =
 // Problem 26
 let rec extract k items =
     if k < 1 then
-        [[]]
+        [ [] ]
     elif k = 1 then
-        items |> List.map (fun x -> [x])
+        items |> List.map (fun x -> [ x ])
     else
         match items with
         | item :: rest ->
             let current = List.map (fun x -> item :: x) (extract (k - 1) rest)
-            let others = extract k rest    // collect remaining int current depth
+            let others = extract k rest // collect remaining int current depth
             current @ others
         | [] -> []
