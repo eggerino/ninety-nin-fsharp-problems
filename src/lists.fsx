@@ -196,3 +196,10 @@ let rec removeAt i =
     | [] -> []
     | _ :: t when i = 0 -> t
     | a :: t -> a :: removeAt (i - 1) t
+
+// Problem 21
+let rec insertAt item i =
+    function
+    | [] -> [ item ]
+    | x when i = 0 -> item :: x
+    | a :: t -> a :: insertAt item (i - 1) t
