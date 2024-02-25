@@ -243,3 +243,17 @@ let rec permutation items =
     match items with
     | [] -> []
     | x -> Option.get (at (i + 1) items) :: permutation (removeAt i items)
+
+// Problem 26
+let rec extract k items =
+    if k < 1 then
+        [[]]
+    elif k = 1 then
+        items |> List.map (fun x -> [x])
+    else
+        match items with
+        | item :: rest ->
+            let current = List.map (fun x -> item :: x) (extract (k - 1) rest)
+            let others = extract k rest    // collect remaining int current depth
+            current @ others
+        | [] -> []
