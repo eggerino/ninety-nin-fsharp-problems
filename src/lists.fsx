@@ -92,3 +92,26 @@ let encode items =
                 aux 0 ((count + 1, a) :: acc) rest
 
     rev (aux 0 [] items)
+
+// Problem 11
+type 'a Rle =
+    | One of 'a
+    | Many of int * 'a
+
+let encode2 items =
+    let prepend count item acc =
+        match count with
+        | 1 -> One(item) :: acc
+        | _ -> Many(count, item) :: acc
+
+    let rec aux count acc =
+        function
+        | [] -> acc
+        | [ x ] -> prepend (count + 1) x acc
+        | a :: (b :: _ as rest) ->
+            if a = b then
+                aux (count + 1) acc rest
+            else
+                aux 0 (prepend (count + 1) a acc) rest
+
+    rev (aux 0 [] items)
