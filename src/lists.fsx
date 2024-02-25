@@ -178,3 +178,7 @@ let rec split items count =
     | a :: t, _ ->
         let take, rest = split t (count - 1)
         a :: take, rest
+
+// Problem 18
+let slice items i k =
+    fst (split (snd (split items i)) (k - i + 1))
