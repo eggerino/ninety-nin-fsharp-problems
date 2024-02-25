@@ -159,3 +159,13 @@ let rec replicate items count =
     match items with
     | [] -> []
     | a :: t -> many (replicate t count) count a
+
+// Problem 16
+let drop items n =
+    let rec aux i =
+        function
+        | [] -> []
+        | _ :: t when i = n -> aux 1 t
+        | a :: t -> a :: aux (i + 1) t
+
+    aux 1 items
