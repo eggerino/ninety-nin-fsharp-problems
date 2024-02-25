@@ -115,3 +115,16 @@ let encode2 items =
                 aux 0 (prepend (count + 1) a acc) rest
 
     rev (aux 0 [] items)
+
+// Problem 12
+let decode items =
+    let rec many acc n x =
+        if n = 0 then acc else many (x :: acc) (n - 1) x
+
+    let rec aux acc =
+        function
+        | [] -> acc
+        | One x :: rest -> aux (x :: acc) rest
+        | Many(n, x) :: rest -> aux (many acc n x) rest
+
+    aux [] (rev items)
