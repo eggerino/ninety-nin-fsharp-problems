@@ -128,3 +128,19 @@ let decode items =
         | Many(n, x) :: rest -> aux (many acc n x) rest
 
     aux [] (rev items)
+
+// Problem 13
+let encode3 items =
+    let createRle n x = if n = 1 then One(x) else Many(n, x)
+
+    let rec aux acc count =
+        function
+        | [] -> acc
+        | [ x ] -> (createRle (count + 1) x) :: acc
+        | a :: (b :: _ as rest) ->
+            if a = b then
+                aux acc (count + 1) rest
+            else
+                aux ((createRle (count + 1) a) :: acc) 0 rest
+
+    items |> aux [] 0 |> rev
