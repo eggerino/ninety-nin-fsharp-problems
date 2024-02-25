@@ -14,3 +14,10 @@ module lists
         | [_] -> None
         | [first; second] -> Some(first, second)
         | _ :: rest -> lastTwo rest
+
+    // Problem 3
+    let rec at index items =
+        match index, items with
+        | _, [] -> None
+        | 1, item :: _ -> Some(item)
+        | _, _ :: rest -> at (index - 1) rest
