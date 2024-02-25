@@ -30,3 +30,12 @@ let length items =
         | _ :: rest -> recLength (current + 1) rest
 
     recLength 0 items
+
+// Problem 5
+let rev items =
+    let rec aux acc =
+        function
+        | [] -> acc
+        | item :: rest -> aux (item :: acc) rest
+
+    aux [] items
