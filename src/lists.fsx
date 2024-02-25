@@ -150,3 +150,12 @@ let rec duplicate =
     function
     | [] -> []
     | a :: t -> a :: a :: duplicate t
+
+// Problem 15
+let rec replicate items count =
+    let rec many acc n x =
+        if n = 0 then acc else many (x :: acc) (n - 1) x
+
+    match items with
+    | [] -> []
+    | a :: t -> many (replicate t count) count a
