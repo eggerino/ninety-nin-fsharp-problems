@@ -182,3 +182,10 @@ let rec split items count =
 // Problem 18
 let slice items i k =
     fst (split (snd (split items i)) (k - i + 1))
+
+// Problem 19
+let rotate items n =
+    let len = length items
+    let count = if len = 0 then 0 else ((n % len) + len) % len
+    let first, second = split items count
+    second @ first
