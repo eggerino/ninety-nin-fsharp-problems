@@ -144,3 +144,9 @@ let encode3 items =
                 aux ((createRle (count + 1) a) :: acc) 0 rest
 
     items |> aux [] 0 |> rev
+
+// Problem 14
+let rec duplicate =
+    function
+    | [] -> []
+    | a :: t -> a :: a :: duplicate t
