@@ -62,3 +62,19 @@ let rec compress =
     function
     | a :: (b :: _ as rest) -> if a = b then compress rest else a :: compress rest
     | x -> x
+
+// Problem 9
+let pack items =
+    let rec consume item acc =
+        function
+        | a :: rest when a = item -> consume item (a :: acc) rest
+        | x -> acc, x
+
+    let rec aux acc =
+        function
+        | [] -> acc
+        | a :: _ as items ->
+            let block, consumedItems = consume a [] items
+            aux (block :: acc) consumedItems
+
+    items |> aux [] |> rev
