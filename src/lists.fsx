@@ -39,3 +39,7 @@ let rev items =
         | item :: rest -> aux (item :: acc) rest
 
     aux [] items
+
+// Problem 6
+let isPalindrome items =
+    items = rev items
